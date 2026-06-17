@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Reconstruindo a história de populações com dados genéticos – Ana Cristina Fazza</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f64d32c425b51e35a181d56ccd3e28fb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+
+<script src="../site_libs/leaflet-1.3.1/leaflet.js"></script>
+
+<link href="../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+
+<script src="../site_libs/proj4-2.6.2/proj4.min.js"></script>
+
+<script src="../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+
+<link href="../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+
+<script src="../site_libs/leaflet-binding-2.2.3/leaflet.js"></script>
+
+<script src="../site_libs/leaflet-providers-3.0.0/leaflet-providers.js"></script>
+
+<script src="../site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Ana Cristina Fazza</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Início</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-cases" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Cases</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-cases">    
+        <li>
+    <a class="dropdown-item" href="../cases/tese-filogeografia.html">
+ <span class="dropdown-text">Doutorado — inferência em dados genéticos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../cases/tcc.html">
+ <span class="dropdown-text">Especialização — horário escolar e desempenho</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../sobre.html"> 
+<span class="menu-text">Sobre</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/ana-cristina-fazza"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:crisfazza@gmail.com"> <i class="bi bi-envelope" role="img" aria-label="E-mail">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#o-contexto" id="toc-o-contexto" class="nav-link active" data-scroll-target="#o-contexto">O contexto</a></li>
+  <li><a href="#a-pergunta-de-negócio-traduzida" id="toc-a-pergunta-de-negócio-traduzida" class="nav-link" data-scroll-target="#a-pergunta-de-negócio-traduzida">A pergunta de negócio (traduzida)</a></li>
+  <li><a href="#os-dados" id="toc-os-dados" class="nav-link" data-scroll-target="#os-dados">Os dados</a></li>
+  <li><a href="#dos-métodos-científicos-às-habilidades-de-mercado" id="toc-dos-métodos-científicos-às-habilidades-de-mercado" class="nav-link" data-scroll-target="#dos-métodos-científicos-às-habilidades-de-mercado">Dos métodos científicos às habilidades de mercado</a></li>
+  <li><a href="#um-pedaço-da-análise-em-r" id="toc-um-pedaço-da-análise-em-r" class="nav-link" data-scroll-target="#um-pedaço-da-análise-em-r">Um pedaço da análise, em R</a>
+  <ul class="collapse">
+  <li><a href="#diversidade-por-marcador" id="toc-diversidade-por-marcador" class="nav-link" data-scroll-target="#diversidade-por-marcador">Diversidade por marcador</a></li>
+  <li><a href="#quantos-grupos-existem-a-mesma-pergunta-em-termos-universais" id="toc-quantos-grupos-existem-a-mesma-pergunta-em-termos-universais" class="nav-link" data-scroll-target="#quantos-grupos-existem-a-mesma-pergunta-em-termos-universais">“Quantos grupos existem?” — a mesma pergunta, em termos universais</a></li>
+  </ul></li>
+  <li><a href="#o-que-os-dados-disseram" id="toc-o-que-os-dados-disseram" class="nav-link" data-scroll-target="#o-que-os-dados-disseram">O que os dados disseram</a></li>
+  <li><a href="#por-que-isso-importa-para-uma-empresa" id="toc-por-que-isso-importa-para-uma-empresa" class="nav-link" data-scroll-target="#por-que-isso-importa-para-uma-empresa">Por que isso importa para uma empresa</a></li>
+  <li><a href="#habilidades-demonstradas-neste-case" id="toc-habilidades-demonstradas-neste-case" class="nav-link" data-scroll-target="#habilidades-demonstradas-neste-case">Habilidades demonstradas neste case</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Reconstruindo a história de populações com dados genéticos</h1>
+<p class="subtitle lead">Doutorado em Ciências (USP) · clustering, simulação bayesiana, PCA e dados geoespaciais</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Resumo executivo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A partir de amostras genéticas coletadas em <strong>41 pontos</strong> ao longo da Mata Atlântica, precisei responder a duas perguntas: essas populações formam <strong>um grupo só ou vários</strong>? E como o <strong>tamanho</strong> delas mudou ao longo do tempo? Para isso, <strong>limpei e integrei três tipos de dados</strong> diferentes, usei <strong>clustering</strong> para procurar grupos, <strong>testes de hipótese</strong> para separar sinal de ruído e <strong>modelagem por simulação</strong> (1 milhão de cenários) para estimar a história mais provável. As mesmas etapas — preparar dados, escolher o método certo, validar e comunicar — sustentam qualquer boa análise de negócio.</p>
+</div>
+</div>
+<section id="o-contexto" class="level2">
+<h2 class="anchored" data-anchor-id="o-contexto">O contexto</h2>
+<p>Numa pesquisa de doutorado, investiguei a história evolutiva de duas aves da Mata Atlântica (<em>Dendrocincla turdina</em> e <em>Drymophila squamata</em>) a partir do DNA de indivíduos coletados em campo e em coleções de museus. A pergunta científica era de evolução; o <strong>trabalho</strong>, do começo ao fim, era de dados.</p>
+</section>
+<section id="a-pergunta-de-negócio-traduzida" class="level2">
+<h2 class="anchored" data-anchor-id="a-pergunta-de-negócio-traduzida">A pergunta de negócio (traduzida)</h2>
+<blockquote class="blockquote">
+<p>Dado um conjunto grande de medições espalhadas geograficamente, <strong>existem subgrupos distintos</strong> na população — ou é tudo um grupo só? E o que os dados dizem sobre como esse “tamanho de base” <strong>cresceu ou encolheu</strong> no tempo?</p>
+</blockquote>
+<p>É exatamente o tipo de pergunta de <strong>segmentação</strong> e de <strong>análise de tendência</strong> que aparece o tempo todo fora da academia.</p>
+</section>
+<section id="os-dados" class="level2">
+<h2 class="anchored" data-anchor-id="os-dados">Os dados</h2>
+<ul>
+<li><strong>41 localidades</strong> georreferenciadas (4 estados + Paraguai)</li>
+<li><strong>141 indivíduos</strong> analisados (campo + coleções de museus)</li>
+<li><strong>3 tipos de marcador integrados</strong>: 8 microssatélites, 1 gene mitocondrial (ND2) e 1 íntron nuclear (FIB7)</li>
+<li>Fontes heterogêneas reunidas, limpas e padronizadas antes de qualquer análise</li>
+<li>Organização e cruzamento das planilhas de amostras em <strong>Excel</strong> antes da análise em R</li>
+</ul>
+<p>O mapa abaixo é gerado <strong>em R, a partir das coordenadas reais</strong> das coletas — um exemplo de dado geoespacial pronto para análise:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>ver código R</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">colorFactor</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#0f6e56"</span>, <span class="st">"#1d9e75"</span>, <span class="st">"#185fa5"</span>, <span class="st">"#ba7517"</span>, <span class="st">"#993c1d"</span>, <span class="st">"#534ab7"</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">domain  =</span> loc<span class="sc">$</span>estado</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(loc) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(<span class="st">"CartoDB.Positron"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>lng, <span class="sc">~</span>lat, <span class="at">radius =</span> <span class="dv">6</span>, <span class="at">color =</span> <span class="sc">~</span><span class="fu">pal</span>(estado),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">stroke =</span> <span class="cn">FALSE</span>, <span class="at">fillOpacity =</span> <span class="fl">0.85</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="sc">~</span><span class="fu">paste0</span>(localidade, <span class="st">" — "</span>, estado)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLegend</span>(<span class="st">"bottomright"</span>, <span class="at">pal =</span> pal, <span class="at">values =</span> <span class="sc">~</span>estado, <span class="at">title =</span> <span class="st">"Estado"</span>, <span class="at">opacity =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-0c38ea4fd10b1657c2f3" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-0c38ea4fd10b1657c2f3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[-12.8603,-12.8704,-13.8414,-14.3625,-16.4121,-16.4333,-17.1333,-17.2,-17.3833,-17.5194,-17.5721,-17.7383,-17.8919,-18.0555,-19.0333,-19.1969,-19.3909,-19.7667,-19.7833,-19.9356,-20.0742,-20.1025,-20.3683,-20.3833,-20.7762,-20.9308,-21.5753,-22.32,-22.4961,-22.57,-23.2178,-23.3775,-23.6203,-23.8544,-23.9326,-24.014,-24.0399,-24.32,-25.2031,-26.1666,-27.3254],[-39.4738,-39.4781,-39.2411,-40.2075,-40.0555,-41,-42.7667,-42.85,-39.2833,-39.1956,-41.8019,-41.7866,-39.3719,-39.5497,-40.9833,-40.0978,-40.0715,-42.55,-42.1333,-40.6003,-41.1239,-40.5292,-41.2439,-40.8833,-41.6759,-41.8689,-41.9108,-43.44,-44.5633,-44.02,-44.7131,-44.8397,-45.4131,-46.1386,-47.0669,-47.3605,-46.7766,-46.9983,-48.2322,-56,-48.9622],6,null,null,{"interactive":true,"className":"","stroke":false,"color":["#0F6E56","#0F6E56","#0F6E56","#0F6E56","#2D838B","#2D838B","#2D838B","#2D838B","#0F6E56","#0F6E56","#2D838B","#2D838B","#0F6E56","#0F6E56","#19906C","#19906C","#19906C","#2D838B","#2D838B","#19906C","#19906C","#19906C","#19906C","#19906C","#19906C","#A7551C","#A7551C","#A7551C","#A7551C","#A7551C","#A7551C","#534AB7","#534AB7","#534AB7","#534AB7","#534AB7","#534AB7","#534AB7","#516193","#AE7134","#923E4A"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#0F6E56","#0F6E56","#0F6E56","#0F6E56","#2D838B","#2D838B","#2D838B","#2D838B","#0F6E56","#0F6E56","#2D838B","#2D838B","#0F6E56","#0F6E56","#19906C","#19906C","#19906C","#2D838B","#2D838B","#19906C","#19906C","#19906C","#19906C","#19906C","#19906C","#A7551C","#A7551C","#A7551C","#A7551C","#A7551C","#A7551C","#534AB7","#534AB7","#534AB7","#534AB7","#534AB7","#534AB7","#534AB7","#516193","#AE7134","#923E4A"],"fillOpacity":0.85},null,null,null,null,["Santa Terezinha — BA","Elísio Medrado — BA","Igrapiúna — BA","Boa Nova — BA","Santa Maria do Salto — MG","Jequitinhonha — MG","Leme do Prado — MG","Turmalina — MG","Prado — BA","Alcobaça — BA","Ladainha — MG","Poté — MG","Nova Viçosa — BA","Mucuri — BA","Alto Rio Novo — ES","Sooretama — ES","Linhares — ES","Marliéria — MG","Caratinga — MG","Santa Teresa — ES","Afonso Cláudio — ES","Santa Leopoldina — ES","Conceição do Castelo — ES","Domingos Martins — ES","Guaçuí — ES","Varre-Sai — RJ","Cambuci — RJ","Mendes — RJ","Itatiaia — RJ","Mangaratiba — RJ","Parati — RJ","Picinguaba — SP","Caraguatatuba — SP","Bertioga — SP","Juquitiba — SP","Peruíbe — SP","Itanhaém — SP","Tapiraí — SP","Guaraqueçaba — PR","Caazapá — PY","Nova Trento — SC"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#0F6E56","#19906C","#2D838B","#516193","#AE7134","#A7551C","#923E4A","#534AB7"],"labels":["BA","ES","MG","PR","PY","RJ","SC","SP"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"factor","title":"Estado","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[-27.3254,-12.8603],"lng":[-56,-39.1956]}},"evals":[],"jsHooks":[]}</script>
+<p>As 41 localidades de coleta ao longo da Mata Atlântica. Passe o mouse para ver o nome.</p>
+</div>
+</div>
+</section>
+<section id="dos-métodos-científicos-às-habilidades-de-mercado" class="level2">
+<h2 class="anchored" data-anchor-id="dos-métodos-científicos-às-habilidades-de-mercado">Dos métodos científicos às habilidades de mercado</h2>
+<p>Cada técnica usada na tese tem um nome de mercado bem reconhecível:</p>
+<div class="traducao">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Na tese (linguagem científica)</th>
+<th>Como habilidade de dados</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Excel</td>
+<td>Funções para manipulação e organização dos dados</td>
+</tr>
+<tr class="even">
+<td>STRUCTURE + método de Evanno</td>
+<td>Clustering não-supervisionado e escolha do nº de grupos</td>
+</tr>
+<tr class="odd">
+<td>ABC / DIYABC — 1 milhão de simulações</td>
+<td>Modelagem por simulação Monte Carlo e inferência bayesiana</td>
+</tr>
+<tr class="even">
+<td>BEAST + Tracer (skyline plot)</td>
+<td>MCMC e diagnóstico de convergência</td>
+</tr>
+<tr class="odd">
+<td>Análise de componentes principais (validação)</td>
+<td>Redução de dimensionalidade (PCA)</td>
+</tr>
+<tr class="even">
+<td>D de Tajima, Fs de Fu, Wilcoxon</td>
+<td>Testes de hipótese e significância</td>
+</tr>
+<tr class="odd">
+<td>Correção sequencial de Bonferroni</td>
+<td>Correção para múltiplos testes (erro tipo I)</td>
+</tr>
+<tr class="even">
+<td>Significância por 1.000 simulações</td>
+<td>Inferência por reamostragem / simulação</td>
+</tr>
+<tr class="odd">
+<td>AMOVA, F-estatísticas, diversidade</td>
+<td>Estatística descritiva e decomposição de variância</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="um-pedaço-da-análise-em-r" class="level2">
+<h2 class="anchored" data-anchor-id="um-pedaço-da-análise-em-r">Um pedaço da análise, em R</h2>
+<section id="diversidade-por-marcador" class="level3">
+<h3 class="anchored" data-anchor-id="diversidade-por-marcador">Diversidade por marcador</h3>
+<p>Estatísticas descritivas dos 7 microssatélites usados (heterozigosidade <strong>observada</strong> vs.&nbsp;<strong>esperada</strong> — uma forma de medir variabilidade):</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Loco</th>
+<th style="text-align: center;">N</th>
+<th style="text-align: center;">Nº alelos</th>
+<th style="text-align: center;">Ho</th>
+<th style="text-align: center;">He</th>
+<th style="text-align: center;">Fis</th>
+<th style="text-align: center;">p (Fis)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Dft-01</td>
+<td style="text-align: center;">117</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">0.384</td>
+<td style="text-align: center;">0.355</td>
+<td style="text-align: center;">-0.083</td>
+<td style="text-align: center;">0.175</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dft-02</td>
+<td style="text-align: center;">128</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0.484</td>
+<td style="text-align: center;">0.521</td>
+<td style="text-align: center;">0.070</td>
+<td style="text-align: center;">0.968</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dft-06</td>
+<td style="text-align: center;">132</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">0.424</td>
+<td style="text-align: center;">0.406</td>
+<td style="text-align: center;">-0.046</td>
+<td style="text-align: center;">0.150</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dft-09</td>
+<td style="text-align: center;">112</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.089</td>
+<td style="text-align: center;">0.102</td>
+<td style="text-align: center;">-0.128</td>
+<td style="text-align: center;">0.750</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dft-10</td>
+<td style="text-align: center;">132</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.219</td>
+<td style="text-align: center;">0.225</td>
+<td style="text-align: center;">0.023</td>
+<td style="text-align: center;">0.887</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dft-11</td>
+<td style="text-align: center;">124</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.258</td>
+<td style="text-align: center;">0.266</td>
+<td style="text-align: center;">0.030</td>
+<td style="text-align: center;">0.950</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dft-16</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.031</td>
+<td style="text-align: center;">0.031</td>
+<td style="text-align: center;">-0.009</td>
+<td style="text-align: center;">0.950</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>ver código R</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>micro_long <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">loco  =</span> <span class="fu">rep</span>(micro<span class="sc">$</span>loco, <span class="dv">2</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">tipo  =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Observada (Ho)"</span>, <span class="st">"Esperada (He)"</span>), <span class="at">each =</span> <span class="fu">nrow</span>(micro)),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">valor =</span> <span class="fu">c</span>(micro<span class="sc">$</span>Ho, micro<span class="sc">$</span>He)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(micro_long, <span class="fu">aes</span>(loco, valor, <span class="at">fill =</span> tipo)) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">width =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Observada (Ho)"</span> <span class="ot">=</span> cores_marca<span class="sc">$</span>teal2,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Esperada (He)"</span>   <span class="ot">=</span> cores_marca<span class="sc">$</span>ocean)) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"heterozigosidade"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tema_portfolio</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-micro" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-micro-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="tese-filogeografia_files/figure-html/fig-micro-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-micro-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Heterozigosidade observada e esperada por loco. Valores próximos indicam populações em equilíbrio.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A tabela de diversidade das sequências reforça o quadro:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Marcador</th>
+<th style="text-align: center;">N</th>
+<th style="text-align: center;">Sítios</th>
+<th style="text-align: center;">π</th>
+<th style="text-align: center;">Nº haplótipos</th>
+<th style="text-align: center;">S</th>
+<th style="text-align: center;">Hd</th>
+<th style="text-align: center;">D de Tajima</th>
+<th style="text-align: center;">Fs de Fu</th>
+<th style="text-align: center;">R²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ND2</td>
+<td style="text-align: center;">118</td>
+<td style="text-align: center;">1011</td>
+<td style="text-align: center;">0.002490</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">0.864</td>
+<td style="text-align: center;">-1.7525</td>
+<td style="text-align: center;">-15.699</td>
+<td style="text-align: center;">0.0910</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FIB7</td>
+<td style="text-align: center;">218</td>
+<td style="text-align: center;">822</td>
+<td style="text-align: center;">0.000467</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">0.320</td>
+<td style="text-align: center;">-1.7865</td>
+<td style="text-align: center;">-10.580</td>
+<td style="text-align: center;">0.0211</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="quantos-grupos-existem-a-mesma-pergunta-em-termos-universais" class="level3">
+<h3 class="anchored" data-anchor-id="quantos-grupos-existem-a-mesma-pergunta-em-termos-universais">“Quantos grupos existem?” — a mesma pergunta, em termos universais</h3>
+<p>Na tese, decidir <strong>quantas populações</strong> havia é o mesmo problema de <strong>quantos segmentos</strong> existem numa base de clientes. Abaixo, uma demonstração do raciocínio com <strong>dados simulados</strong> (não os da tese): rodo <em>k-means</em> para vários números de grupos e uso o <strong>método do cotovelo</strong> para escolher — exatamente a lógica por trás da escolha do “melhor K” no clustering genético.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>ver código R</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">150</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>demo <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>), <span class="fu">rnorm</span>(n, <span class="fl">2.6</span>, <span class="dv">1</span>)),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>), <span class="fu">rnorm</span>(n, <span class="fl">1.8</span>, <span class="dv">1</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>wss <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="cf">function</span>(k) <span class="fu">kmeans</span>(demo, <span class="at">centers =</span> k, <span class="at">nstart =</span> <span class="dv">10</span>)<span class="sc">$</span>tot.withinss)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">k =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">wss =</span> wss), <span class="fu">aes</span>(k, wss)) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> cores_marca<span class="sc">$</span>cinza, <span class="at">linewidth =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> cores_marca<span class="sc">$</span>teal) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"número de grupos (k)"</span>, <span class="at">y =</span> <span class="st">"dispersão dentro dos grupos"</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tema_portfolio</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-cotovelo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cotovelo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="tese-filogeografia_files/figure-html/fig-cotovelo-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cotovelo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Método do cotovelo em dados simulados: a queda deixa de compensar a partir de poucos grupos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="o-que-os-dados-disseram" class="level2">
+<h2 class="anchored" data-anchor-id="o-que-os-dados-disseram">O que os dados disseram</h2>
+<ul>
+<li><strong>Sem subgrupos claros</strong> em <em>D. turdina</em>: clustering, redes de haplótipos e AMOVA concordaram — a maior parte da variação está <em>dentro</em> das localidades, não entre elas. (Saber quando <strong>não</strong> há estrutura é tão importante quanto achar uma.)</li>
+<li><strong>Sinal de crescimento populacional</strong> após o último máximo glacial (~21 mil anos atrás), detectado por vários testes independentes e <strong>datado</strong> pela modelagem bayesiana — convergência de evidências.</li>
+<li><strong>Já em <em>D. squamata</em></strong>, a mesma caixa de ferramentas revelou <strong>quatro linhagens</strong> geográficas, uma delas bem antiga (~1,1 milhão de anos) — com implicação direta para prioridades de conservação.</li>
+</ul>
+</section>
+<section id="por-que-isso-importa-para-uma-empresa" class="level2">
+<h2 class="anchored" data-anchor-id="por-que-isso-importa-para-uma-empresa">Por que isso importa para uma empresa</h2>
+<p>O valor não está nas aves: está em <strong>pegar dados bagunçados de várias fontes, fazer a pergunta certa, escolher o método adequado, validar o resultado e traduzir tudo em uma conclusão acionável</strong>. É o mesmo ciclo de uma análise de churn, de segmentação de clientes ou de previsão de demanda.</p>
+</section>
+<section id="habilidades-demonstradas-neste-case" class="level2">
+<h2 class="anchored" data-anchor-id="habilidades-demonstradas-neste-case">Habilidades demonstradas neste case</h2>
+<div class="pills">
+  <span class="pill">Limpeza &amp; integração de dados</span>
+  <span class="pill">Dados geoespaciais</span>
+  <span class="pill">Clustering não-supervisionado</span>
+  <span class="pill">PCA</span>
+  <span class="pill">Inferência bayesiana</span>
+  <span class="pill">Simulação Monte Carlo</span>
+  <span class="pill">MCMC</span>
+  <span class="pill">Testes de hipótese</span>
+  <span class="pill">Correção de múltiplos testes</span>
+  <span class="pill">Excel</span>
+  <span class="pill">Visualização (R / ggplot2 / leaflet)</span>
+  <span class="pill">Comunicação de resultados</span>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/crisfazza\.github\.io\/portfolio\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Ana Cristina Fazza · Portfólio de análise de dados</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

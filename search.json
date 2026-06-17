@@ -1,0 +1,205 @@
+[
+  {
+    "objectID": "sobre.html",
+    "href": "sobre.html",
+    "title": "Sobre",
+    "section": "",
+    "text": "Sou Ana Cristina Fazza, doutora em Ciências pela USP. Passei anos analisando dados quantitativos em pesquisa — estatística, modelagem por simulação, clustering e visualização — e hoje aplico esse mesmo rigor a problemas de dados fora da academia.\nGosto da parte que vai do dado bruto e bagunçado até uma conclusão que alguém consegue usar para decidir. Acredito que a melhor análise é a que se explica sozinha para quem não é da área."
+  },
+  {
+    "objectID": "sobre.html#formação-acadêmica",
+    "href": "sobre.html#formação-acadêmica",
+    "title": "Sobre",
+    "section": "Formação acadêmica",
+    "text": "Formação acadêmica\n\nEspecialização em Neurociência e Aprendizagem na Educação — USP/Esalq (Pecege), 2026\nDoutorado em Biologia (Genética e Biologia Evolutiva) — Universidade de São Paulo (2010–2015)\n\nDoutorado-sanduíche em Bioinformática — City University of New York (CUNY/CCNY), Nova York (2013–2014)\n\nMestrado em Genética e Evolução — Universidade Federal de São Carlos (UFSCar) (2008–2010)\nLicenciatura e Bacharelado em Ciências Biológicas — UNESP, São José do Rio Preto (2003–2008)"
+  },
+  {
+    "objectID": "sobre.html#formação-complementar",
+    "href": "sobre.html#formação-complementar",
+    "title": "Sobre",
+    "section": "Formação complementar",
+    "text": "Formação complementar\n\nMBA em Planejamento Financeiro e Análise de Investimentos — Anhanguera/Unopar (2023–2024)\nTécnico em Informática / Processamento de Dados — ETEC Camargo Aranha · Centro Paula Souza (2002–2003)"
+  },
+  {
+    "objectID": "sobre.html#ferramentas-e-idiomas",
+    "href": "sobre.html#ferramentas-e-idiomas",
+    "title": "Sobre",
+    "section": "Ferramentas e idiomas",
+    "text": "Ferramentas e idiomas\nR · Excel / planilhas · Git · softwares estatísticos\nPortuguês (nativo) · Inglês (fluente)"
+  },
+  {
+    "objectID": "sobre.html#contato",
+    "href": "sobre.html#contato",
+    "title": "Sobre",
+    "section": "Contato",
+    "text": "Contato\n\n   crisfazza@gmail.com\n   linkedin.com/in/ana-cristina-fazza"
+  },
+  {
+    "objectID": "cases/tese-filogeografia.html",
+    "href": "cases/tese-filogeografia.html",
+    "title": "Reconstruindo a história de populações com dados genéticos",
+    "section": "",
+    "text": "NoteResumo executivo\n\n\n\nA partir de amostras genéticas coletadas em 41 pontos ao longo da Mata Atlântica, precisei responder a duas perguntas: essas populações formam um grupo só ou vários? E como o tamanho delas mudou ao longo do tempo? Para isso, limpei e integrei três tipos de dados diferentes, usei clustering para procurar grupos, testes de hipótese para separar sinal de ruído e modelagem por simulação (1 milhão de cenários) para estimar a história mais provável. As mesmas etapas — preparar dados, escolher o método certo, validar e comunicar — sustentam qualquer boa análise de negócio."
+  },
+  {
+    "objectID": "cases/tese-filogeografia.html#o-contexto",
+    "href": "cases/tese-filogeografia.html#o-contexto",
+    "title": "Reconstruindo a história de populações com dados genéticos",
+    "section": "O contexto",
+    "text": "O contexto\nNuma pesquisa de doutorado, investiguei a história evolutiva de duas aves da Mata Atlântica (Dendrocincla turdina e Drymophila squamata) a partir do DNA de indivíduos coletados em campo e em coleções de museus. A pergunta científica era de evolução; o trabalho, do começo ao fim, era de dados."
+  },
+  {
+    "objectID": "cases/tese-filogeografia.html#a-pergunta-de-negócio-traduzida",
+    "href": "cases/tese-filogeografia.html#a-pergunta-de-negócio-traduzida",
+    "title": "Reconstruindo a história de populações com dados genéticos",
+    "section": "A pergunta de negócio (traduzida)",
+    "text": "A pergunta de negócio (traduzida)\n\nDado um conjunto grande de medições espalhadas geograficamente, existem subgrupos distintos na população — ou é tudo um grupo só? E o que os dados dizem sobre como esse “tamanho de base” cresceu ou encolheu no tempo?\n\nÉ exatamente o tipo de pergunta de segmentação e de análise de tendência que aparece o tempo todo fora da academia."
+  },
+  {
+    "objectID": "cases/tese-filogeografia.html#os-dados",
+    "href": "cases/tese-filogeografia.html#os-dados",
+    "title": "Reconstruindo a história de populações com dados genéticos",
+    "section": "Os dados",
+    "text": "Os dados\n\n41 localidades georreferenciadas (4 estados + Paraguai)\n141 indivíduos analisados (campo + coleções de museus)\n3 tipos de marcador integrados: 8 microssatélites, 1 gene mitocondrial (ND2) e 1 íntron nuclear (FIB7)\nFontes heterogêneas reunidas, limpas e padronizadas antes de qualquer análise\nOrganização e cruzamento das planilhas de amostras em Excel antes da análise em R\n\nO mapa abaixo é gerado em R, a partir das coordenadas reais das coletas — um exemplo de dado geoespacial pronto para análise:\n\n\nver código R\npal &lt;- colorFactor(\n  palette = c(\"#0f6e56\", \"#1d9e75\", \"#185fa5\", \"#ba7517\", \"#993c1d\", \"#534ab7\"),\n  domain  = loc$estado\n)\nleaflet(loc) |&gt;\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addCircleMarkers(\n    ~lng, ~lat, radius = 6, color = ~pal(estado),\n    stroke = FALSE, fillOpacity = 0.85,\n    label = ~paste0(localidade, \" — \", estado)\n  ) |&gt;\n  addLegend(\"bottomright\", pal = pal, values = ~estado, title = \"Estado\", opacity = 1)\n\n\n\n\nAs 41 localidades de coleta ao longo da Mata Atlântica. Passe o mouse para ver o nome."
+  },
+  {
+    "objectID": "cases/tese-filogeografia.html#dos-métodos-científicos-às-habilidades-de-mercado",
+    "href": "cases/tese-filogeografia.html#dos-métodos-científicos-às-habilidades-de-mercado",
+    "title": "Reconstruindo a história de populações com dados genéticos",
+    "section": "Dos métodos científicos às habilidades de mercado",
+    "text": "Dos métodos científicos às habilidades de mercado\nCada técnica usada na tese tem um nome de mercado bem reconhecível:\n\n\n\n\n\n\n\n\nNa tese (linguagem científica)\nComo habilidade de dados\n\n\n\n\nExcel\nFunções para manipulação e organização dos dados\n\n\nSTRUCTURE + método de Evanno\nClustering não-supervisionado e escolha do nº de grupos\n\n\nABC / DIYABC — 1 milhão de simulações\nModelagem por simulação Monte Carlo e inferência bayesiana\n\n\nBEAST + Tracer (skyline plot)\nMCMC e diagnóstico de convergência\n\n\nAnálise de componentes principais (validação)\nRedução de dimensionalidade (PCA)\n\n\nD de Tajima, Fs de Fu, Wilcoxon\nTestes de hipótese e significância\n\n\nCorreção sequencial de Bonferroni\nCorreção para múltiplos testes (erro tipo I)\n\n\nSignificância por 1.000 simulações\nInferência por reamostragem / simulação\n\n\nAMOVA, F-estatísticas, diversidade\nEstatística descritiva e decomposição de variância"
+  },
+  {
+    "objectID": "cases/tese-filogeografia.html#um-pedaço-da-análise-em-r",
+    "href": "cases/tese-filogeografia.html#um-pedaço-da-análise-em-r",
+    "title": "Reconstruindo a história de populações com dados genéticos",
+    "section": "Um pedaço da análise, em R",
+    "text": "Um pedaço da análise, em R\n\nDiversidade por marcador\nEstatísticas descritivas dos 7 microssatélites usados (heterozigosidade observada vs. esperada — uma forma de medir variabilidade):\n\n\n\n\n\nLoco\nN\nNº alelos\nHo\nHe\nFis\np (Fis)\n\n\n\n\nDft-01\n117\n6\n0.384\n0.355\n-0.083\n0.175\n\n\nDft-02\n128\n4\n0.484\n0.521\n0.070\n0.968\n\n\nDft-06\n132\n6\n0.424\n0.406\n-0.046\n0.150\n\n\nDft-09\n112\n3\n0.089\n0.102\n-0.128\n0.750\n\n\nDft-10\n132\n3\n0.219\n0.225\n0.023\n0.887\n\n\nDft-11\n124\n3\n0.258\n0.266\n0.030\n0.950\n\n\nDft-16\n130\n3\n0.031\n0.031\n-0.009\n0.950\n\n\n\n\n\n\n\nver código R\nmicro_long &lt;- data.frame(\n  loco  = rep(micro$loco, 2),\n  tipo  = rep(c(\"Observada (Ho)\", \"Esperada (He)\"), each = nrow(micro)),\n  valor = c(micro$Ho, micro$He)\n)\nggplot(micro_long, aes(loco, valor, fill = tipo)) +\n  geom_col(position = \"dodge\", width = 0.65) +\n  scale_fill_manual(values = c(\"Observada (Ho)\" = cores_marca$teal2,\n                               \"Esperada (He)\"   = cores_marca$ocean)) +\n  labs(x = NULL, y = \"heterozigosidade\", fill = NULL) +\n  tema_portfolio()\n\n\n\n\n\n\n\n\nFigure 1: Heterozigosidade observada e esperada por loco. Valores próximos indicam populações em equilíbrio.\n\n\n\n\n\nA tabela de diversidade das sequências reforça o quadro:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarcador\nN\nSítios\nπ\nNº haplótipos\nS\nHd\nD de Tajima\nFs de Fu\nR²\n\n\n\n\nND2\n118\n1011\n0.002490\n26\n30\n0.864\n-1.7525\n-15.699\n0.0910\n\n\nFIB7\n218\n822\n0.000467\n11\n10\n0.320\n-1.7865\n-10.580\n0.0211\n\n\n\n\n\n\n\n“Quantos grupos existem?” — a mesma pergunta, em termos universais\nNa tese, decidir quantas populações havia é o mesmo problema de quantos segmentos existem numa base de clientes. Abaixo, uma demonstração do raciocínio com dados simulados (não os da tese): rodo k-means para vários números de grupos e uso o método do cotovelo para escolher — exatamente a lógica por trás da escolha do “melhor K” no clustering genético.\n\n\nver código R\nset.seed(42)\nn &lt;- 150\ndemo &lt;- data.frame(\n  x = c(rnorm(n, 0, 1), rnorm(n, 2.6, 1)),\n  y = c(rnorm(n, 0, 1), rnorm(n, 1.8, 1))\n)\nwss &lt;- sapply(1:7, function(k) kmeans(demo, centers = k, nstart = 10)$tot.withinss)\nggplot(data.frame(k = 1:7, wss = wss), aes(k, wss)) +\n  geom_line(color = cores_marca$cinza, linewidth = 0.7) +\n  geom_point(size = 3, color = cores_marca$teal) +\n  scale_x_continuous(breaks = 1:7) +\n  labs(x = \"número de grupos (k)\", y = \"dispersão dentro dos grupos\") +\n  tema_portfolio()\n\n\n\n\n\n\n\n\nFigure 2: Método do cotovelo em dados simulados: a queda deixa de compensar a partir de poucos grupos."
+  },
+  {
+    "objectID": "cases/tese-filogeografia.html#o-que-os-dados-disseram",
+    "href": "cases/tese-filogeografia.html#o-que-os-dados-disseram",
+    "title": "Reconstruindo a história de populações com dados genéticos",
+    "section": "O que os dados disseram",
+    "text": "O que os dados disseram\n\nSem subgrupos claros em D. turdina: clustering, redes de haplótipos e AMOVA concordaram — a maior parte da variação está dentro das localidades, não entre elas. (Saber quando não há estrutura é tão importante quanto achar uma.)\nSinal de crescimento populacional após o último máximo glacial (~21 mil anos atrás), detectado por vários testes independentes e datado pela modelagem bayesiana — convergência de evidências.\nJá em D. squamata, a mesma caixa de ferramentas revelou quatro linhagens geográficas, uma delas bem antiga (~1,1 milhão de anos) — com implicação direta para prioridades de conservação."
+  },
+  {
+    "objectID": "cases/tese-filogeografia.html#por-que-isso-importa-para-uma-empresa",
+    "href": "cases/tese-filogeografia.html#por-que-isso-importa-para-uma-empresa",
+    "title": "Reconstruindo a história de populações com dados genéticos",
+    "section": "Por que isso importa para uma empresa",
+    "text": "Por que isso importa para uma empresa\nO valor não está nas aves: está em pegar dados bagunçados de várias fontes, fazer a pergunta certa, escolher o método adequado, validar o resultado e traduzir tudo em uma conclusão acionável. É o mesmo ciclo de uma análise de churn, de segmentação de clientes ou de previsão de demanda."
+  },
+  {
+    "objectID": "cases/tese-filogeografia.html#habilidades-demonstradas-neste-case",
+    "href": "cases/tese-filogeografia.html#habilidades-demonstradas-neste-case",
+    "title": "Reconstruindo a história de populações com dados genéticos",
+    "section": "Habilidades demonstradas neste case",
+    "text": "Habilidades demonstradas neste case\n\n  Limpeza & integração de dados\n  Dados geoespaciais\n  Clustering não-supervisionado\n  PCA\n  Inferência bayesiana\n  Simulação Monte Carlo\n  MCMC\n  Testes de hipótese\n  Correção de múltiplos testes\n  Excel\n  Visualização (R / ggplot2 / leaflet)\n  Comunicação de resultados"
+  },
+  {
+    "objectID": "cases/tcc.html",
+    "href": "cases/tcc.html",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "",
+    "text": "NoteResumo executivo\n\n\n\nA partir de 27.650 registros de notas de 384 alunos (2022–2024) de uma escola de São Paulo, investiguei uma pergunta com cara de negócio: o horário das atividades afeta o resultado? Limpei e estruturei os dados em R, explorei com visualizações e testei as diferenças com métodos estatísticos robustos (ANOVA + Kruskal-Wallis em paralelo, com correção para múltiplas comparações). Achados: aulas mais cedo → melhores notas em todas as áreas; provas mais tarde → melhores notas (com exceção de Ciências da Natureza). O resultado vira uma recomendação concreta de organização de horários."
+  },
+  {
+    "objectID": "cases/tcc.html#o-contexto",
+    "href": "cases/tcc.html#o-contexto",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "O contexto",
+    "text": "O contexto\nNa adolescência, o relógio biológico atrasa — os jovens dormem e acordam mais tarde. A escola, porém, começa cedo. Este trabalho (especialização em Neurociência) testou, com dados reais de desempenho, se o horário de aulas e provas se reflete nas notas."
+  },
+  {
+    "objectID": "cases/tcc.html#a-pergunta-de-negócio-traduzida",
+    "href": "cases/tcc.html#a-pergunta-de-negócio-traduzida",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "A pergunta de negócio (traduzida)",
+    "text": "A pergunta de negócio (traduzida)\n\nExiste um horário em que o “produto” (a aula, a prova) rende mais? O efeito é o mesmo para todos os segmentos (áreas do conhecimento) — ou alguns se comportam diferente?\n\nÉ a mesma forma de pensar de quem otimiza horário de campanha, escala de turno ou janela de atendimento a partir de dados."
+  },
+  {
+    "objectID": "cases/tcc.html#os-dados",
+    "href": "cases/tcc.html#os-dados",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "Os dados",
+    "text": "Os dados\n\n27.650 registros em formato longo (1 linha = 1 nota de um aluno numa disciplina)\n384 alunos (1º e 2º ano do Ensino Médio), anos de 2022 a 2024\n20 disciplinas agrupadas em 4 áreas do conhecimento (reduz viés de disciplina/professor)\nCada registro cruza: nota · disciplina · área · turma · horário da aula · horário da prova · ano · semestre\nDados anonimizados e tratados (padronização de variáveis textuais e numéricas) antes da análise\nCruzamento das planilhas (notas × grade de horários de aula e prova) no Excel, antes de importar para o R"
+  },
+  {
+    "objectID": "cases/tcc.html#dos-métodos-às-habilidades-de-mercado",
+    "href": "cases/tcc.html#dos-métodos-às-habilidades-de-mercado",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "Dos métodos às habilidades de mercado",
+    "text": "Dos métodos às habilidades de mercado\n\n\n\n\n\n\n\n\nNo trabalho\nComo habilidade de dados\n\n\n\n\nExcel\nFunções para manipulação e organização dos dados\n\n\ndplyr sobre 27.650 registros\nManipulação e limpeza de dados (data wrangling)\n\n\nBoxplots por área e horário (ggplot2)\nAnálise exploratória e visualização\n\n\nANOVA + Kruskal-Wallis em paralelo\nTestes paramétricos e não-paramétricos + checagem de robustez\n\n\nPost-hoc de Wilcoxon par a par\nComparações múltiplas entre grupos\n\n\nCorreção de Benjamini-Hochberg\nControle de falsos positivos (FDR)\n\n\nAgrupar horários para equilibrar amostras\nBinning / feature engineering por poder estatístico\n\n\nRecomendação de organização escolar\nTradução de análise em decisão acionável"
+  },
+  {
+    "objectID": "cases/tcc.html#resultado-1-horário-da-aula",
+    "href": "cases/tcc.html#resultado-1-horário-da-aula",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "Resultado 1 — horário da aula",
+    "text": "Resultado 1 — horário da aula\nA nota média por horário de início da aula, em cada área (dados reais do estudo):\n\n\nver código R\nggplot(aula, aes(horario, media, color = area, group = area)) +\n  geom_line(linewidth = 0.9) +\n  geom_point(size = 2.6) +\n  scale_color_manual(values = cores_area) +\n  labs(x = \"horário da aula\", y = \"nota média\", color = NULL) +\n  tema_portfolio()\n\n\n\n\n\n\n\n\nFigure 1: Nota média por horário da aula. Em todas as áreas, os primeiros horários rendem notas mais altas.\n\n\n\n\n\nAs diferenças são estatisticamente significativas em todas as áreas — e os dois testes (paramétrico e não-paramétrico) concordam:\n\n\n\n\n\n\n\n\n\n\n\nÁrea da aula\nANOVA (p)\nKruskal-Wallis (p)\ninterpretação\n\n\n\n\nCiências Humanas\n0,0052\n0,0017\nambos significativos\n\n\nLinguagens\n&lt;0,001\n&lt;0,001\nambos significativos\n\n\nMatemática\n&lt;0,001\n&lt;0,001\nambos significativos\n\n\nCiências da Natureza\n0,0426\n0,0253\nambos significativos"
+  },
+  {
+    "objectID": "cases/tcc.html#resultado-2-horário-da-prova",
+    "href": "cases/tcc.html#resultado-2-horário-da-prova",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "Resultado 2 — horário da prova",
+    "text": "Resultado 2 — horário da prova\nAqui o padrão se inverte — e quebra por área:\n\n\nver código R\nggplot(prova, aes(faixa, media, color = area, group = area)) +\n  geom_line(linewidth = 0.9) +\n  geom_point(size = 2.6) +\n  scale_color_manual(values = cores_area) +\n  labs(x = \"faixa de horário da prova\", y = \"nota média\", color = NULL) +\n  tema_portfolio()\n\n\n\n\n\n\n\n\nFigure 2: Nota média por faixa de horário da prova. Provas mais tarde tendem a render mais — exceto em Ciências da Natureza, que vai na direção oposta.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nÁrea da prova\nANOVA (p)\nKruskal-Wallis (p)\ninterpretação\n\n\n\n\nLinguagens\n0,0011\n&lt;0,001\nambos significativos\n\n\nCiências Humanas\n&lt;0,001\n&lt;0,001\nambos significativos\n\n\nMatemática\n&lt;0,001\n&lt;0,001\nambos significativos\n\n\nCiências da Natureza\n0,0131\n0,0055\nambos significativos"
+  },
+  {
+    "objectID": "cases/tcc.html#por-que-corrigir-para-múltiplas-comparações",
+    "href": "cases/tcc.html#por-que-corrigir-para-múltiplas-comparações",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "Por que corrigir para múltiplas comparações?",
+    "text": "Por que corrigir para múltiplas comparações?\nAo comparar vários pares de horários, cada teste tem uma chance de dar um “falso positivo”. Quanto mais testes, maior o risco de achar diferença onde não há. A correção de Benjamini-Hochberg ajusta os p-valores para controlar essa taxa — é uma linha de R:\n\n\nver código R\n# p-valores brutos de várias comparações (exemplo ilustrativo)\np_brutos &lt;- c(0.001, 0.008, 0.020, 0.041, 0.120, 0.320)\ndata.frame(\n  p_bruto     = p_brutos,\n  p_ajustado  = round(p.adjust(p_brutos, method = \"BH\"), 3),\n  significativo = p.adjust(p_brutos, method = \"BH\") &lt; 0.05\n)\n\n\n  p_bruto p_ajustado significativo\n1   0.001      0.006          TRUE\n2   0.008      0.024          TRUE\n3   0.020      0.040          TRUE\n4   0.041      0.062         FALSE\n5   0.120      0.144         FALSE\n6   0.320      0.320         FALSE"
+  },
+  {
+    "objectID": "cases/tcc.html#o-que-os-dados-disseram",
+    "href": "cases/tcc.html#o-que-os-dados-disseram",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "O que os dados disseram",
+    "text": "O que os dados disseram\n\nAula: quanto mais cedo, melhor — em todas as 4 áreas (ANOVA e Kruskal-Wallis concordam). O período da primeira aula parece pegar o aluno já no “ótimo” do despertar fisiológico.\nProva: o oposto, e não uniforme — Ciências Humanas e Linguagens rendem mais em provas tardias; Matemática faz um “U”; e Ciências da Natureza vai na contramão, melhor logo cedo.\nA leitura: aprender e ser avaliado mobilizam processos cognitivos diferentes, sensíveis ao horário de formas diferentes por área."
+  },
+  {
+    "objectID": "cases/tcc.html#por-que-isso-importa-para-uma-empresa",
+    "href": "cases/tcc.html#por-que-isso-importa-para-uma-empresa",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "Por que isso importa para uma empresa",
+    "text": "Por que isso importa para uma empresa\nÉ um caso completo de análise: dados secundários bagunçados → limpeza e estruturação → exploração visual → teste estatístico robusto → correção honesta → recomendação acionável (distribuir aulas e provas de forma mais estratégica). Troque “nota por horário” por “conversão por horário de campanha” e é o mesmo trabalho."
+  },
+  {
+    "objectID": "cases/tcc.html#habilidades-demonstradas-neste-case",
+    "href": "cases/tcc.html#habilidades-demonstradas-neste-case",
+    "title": "Horário escolar e desempenho: o que 27 mil notas revelam",
+    "section": "Habilidades demonstradas neste case",
+    "text": "Habilidades demonstradas neste case\n\n  Data wrangling (dplyr)\n  Limpeza & padronização\n  Análise exploratória (EDA)\n  Visualização (ggplot2)\n  ANOVA\n  Kruskal-Wallis\n  Comparações múltiplas (post-hoc)\n  Correção FDR (Benjamini-Hochberg)\n  Recomendação acionável\n  Excel\n  R"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ana Cristina Fazza",
+    "section": "",
+    "text": "Portfólio de análise de dados\n  \n  \n  Doutora em Ciências (USP) que passou anos transformando dados\n  complexos em respostas confiáveis — estatística, modelagem e visualização.\n  Agora levo esse mesmo rigor analítico para perguntas de negócio."
+  },
+  {
+    "objectID": "index.html#o-que-eu-faço",
+    "href": "index.html#o-que-eu-faço",
+    "title": "Ana Cristina Fazza",
+    "section": "O que eu faço",
+    "text": "O que eu faço\nTrabalho de dados de ponta a ponta: limpar e integrar fontes diferentes, analisar com método (do teste de hipótese à modelagem por simulação) e, sobretudo, comunicar o resultado de um jeito que orienta decisão. Os cases abaixo partem de projetos científicos reais e mostram cada uma dessas etapas."
+  },
+  {
+    "objectID": "index.html#matriz-de-habilidades",
+    "href": "index.html#matriz-de-habilidades",
+    "title": "Ana Cristina Fazza",
+    "section": "Matriz de habilidades",
+    "text": "Matriz de habilidades\n\n  \n    \n    Estatística & testes de hipótese\n    Hipóteses, significância, correção de múltiplos testes e controle de erro tipo I.\n  \n  \n    \n    Modelagem & inferência\n    Bayesiana, simulação Monte Carlo (ABC), MCMC e seleção de modelos.\n  \n  \n    \n    Clustering & dimensionalidade\n    Segmentação não-supervisionada, escolha do nº de grupos e PCA.\n  \n  \n    \n    Manipulação & integração de dados\n    Limpeza, integração de fontes, cruzamento de tabelas no Excel e dados geoespaciais.\n  \n  \n    \n    Visualização & comunicação\n    Gráficos, mapas e relatórios reproduzíveis que comunicam o resultado.\n  \n  \n    \n    Ferramentas\n    R · Excel · Git · softwares estatísticos."
+  },
+  {
+    "objectID": "index.html#cases",
+    "href": "index.html#cases",
+    "title": "Ana Cristina Fazza",
+    "section": "Cases",
+    "text": "Cases\n\n  \n  \n    Doutorado · dados genéticos\n    Reconstruindo a história de populações com dados genéticos\n    Clustering, simulação bayesiana (1 milhão de simulações), PCA e dados\n    geoespaciais (41 localidades) para reconstruir a história de duas espécies da\n    Mata Atlântica.\n  \n\n\n\n  \n  \n    Especialização · dados educacionais\n    Horário escolar e desempenho: o que 27 mil notas revelam\n    Limpeza e análise de 27.650 notas (384 alunos, 2022–2024) em R: EDA,\n    ANOVA/Kruskal-Wallis e correção de múltiplos testes — terminando numa\n    recomendação acionável."
+  }
+]
