@@ -1,0 +1,87 @@
+---
+pagetitle: "Ana Cristina Fazza — Portfólio de análise de dados"
+toc: false
+---
+
+```{=html}
+<div class="hero">
+  <span class="eyebrow">
+    <span class="dots"><span style="background:#6c5ce7"></span><span style="background:#0b7c6f"></span><span style="background:#b4690e"></span></span>
+    Portfólio de análise de dados
+  </span>
+  <h1>Ana Cristina <span class="accent">Fazza</span></h1>
+  <p class="lead">Doutora em Ciências (USP) que passou anos transformando dados
+  complexos em respostas confiáveis — estatística, modelagem e visualização.
+  Agora levo esse mesmo rigor analítico para perguntas de negócio.</p>
+</div>
+```
+
+## O que eu faço
+
+Trabalho de dados de ponta a ponta: **limpar e integrar** fontes diferentes,
+**analisar com método** (do teste de hipótese à modelagem por simulação) e,
+sobretudo, **comunicar o resultado** de um jeito que orienta decisão. Os cases
+abaixo partem de projetos científicos reais e mostram cada uma dessas etapas.
+
+## Matriz de habilidades
+
+```{=html}
+<div class="skills-grid">
+  <div class="skill-card c1">
+    <div class="ic"><i class="bi bi-bar-chart-line"></i></div>
+    <h3>Estatística &amp; testes de hipótese</h3>
+    <p>Hipóteses, significância, correção de múltiplos testes e controle de erro tipo I.</p>
+  </div>
+  <div class="skill-card c2">
+    <div class="ic"><i class="bi bi-diagram-3"></i></div>
+    <h3>Modelagem &amp; inferência</h3>
+    <p>Bayesiana, simulação Monte Carlo (ABC), MCMC e seleção de modelos.</p>
+  </div>
+  <div class="skill-card c3">
+    <div class="ic"><i class="bi bi-bounding-box-circles"></i></div>
+    <h3>Clustering &amp; dimensionalidade</h3>
+    <p>Segmentação não-supervisionada, escolha do nº de grupos e PCA.</p>
+  </div>
+  <div class="skill-card c4">
+    <div class="ic"><i class="bi bi-table"></i></div>
+    <h3>Manipulação &amp; integração de dados</h3>
+    <p>Limpeza, integração de fontes, cruzamento de tabelas no Excel e dados geoespaciais.</p>
+  </div>
+  <div class="skill-card c5">
+    <div class="ic"><i class="bi bi-graph-up"></i></div>
+    <h3>Visualização &amp; comunicação</h3>
+    <p>Gráficos, mapas e relatórios reproduzíveis que comunicam o resultado.</p>
+  </div>
+  <div class="skill-card c6">
+    <div class="ic"><i class="bi bi-tools"></i></div>
+    <h3>Ferramentas</h3>
+    <p>R · Excel · Git · softwares estatísticos.</p>
+  </div>
+</div>
+```
+
+## Cases
+
+```{=html}
+<a class="case-card grad c2" href="cases/tese-filogeografia.qmd">
+  <div class="case-ic"><i class="bi bi-diagram-3"></i></div>
+  <div>
+    <span class="case-kicker">Doutorado · dados genéticos</span>
+    <h3>Reconstruindo a história de populações com dados genéticos</h3>
+    <p>Clustering, simulação bayesiana (1 milhão de simulações), PCA e dados
+    geoespaciais (41 localidades) para reconstruir a história de duas espécies da
+    Mata Atlântica.</p>
+  </div>
+</a>
+
+<a class="case-card c1" href="cases/tcc.qmd">
+  <div class="case-ic"><i class="bi bi-bar-chart-line"></i></div>
+  <div>
+    <span class="case-kicker">Especialização · dados educacionais</span>
+    <h3>Horário escolar e desempenho: o que 27 mil notas revelam</h3>
+    <p>Limpeza e análise de 27.650 notas (384 alunos, 2022–2024) em R: EDA,
+    ANOVA/Kruskal-Wallis e correção de múltiplos testes — terminando numa
+    recomendação acionável.</p>
+  </div>
+</a>
+```

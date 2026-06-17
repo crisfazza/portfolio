@@ -1,0 +1,8 @@
+/_site/
+/.quarto/
+/_freeze/
+*.html
+.Rproj.user
+.Rhistory
+
+**/*.quarto_ipynb

@@ -1,0 +1,41 @@
+---
+title: "Sobre"
+toc: false
+---
+
+Sou **Ana Cristina Fazza**, doutora em Ciências pela USP. Passei anos
+analisando dados quantitativos em pesquisa — estatística, modelagem por
+simulação, clustering e visualização — e hoje aplico esse mesmo rigor a
+problemas de dados fora da academia.
+
+Gosto da parte que vai do dado bruto e bagunçado até uma conclusão que alguém
+consegue usar para decidir. Acredito que a melhor análise é a que se **explica
+sozinha** para quem não é da área.
+
+## Formação acadêmica
+
+- **Especialização em Neurociência e Aprendizagem na Educação** — USP/Esalq (Pecege), 2026
+- **Doutorado em Biologia** (Genética e Biologia Evolutiva) — Universidade de São Paulo (2010–2015)
+  - Doutorado-sanduíche em **Bioinformática** — City University of New York (CUNY/CCNY), Nova York (2013–2014)
+- **Mestrado em Genética e Evolução** — Universidade Federal de São Carlos (UFSCar) (2008–2010)
+- **Licenciatura e Bacharelado em Ciências Biológicas** — UNESP, São José do Rio Preto (2003–2008)
+
+## Formação complementar
+
+- **MBA em Planejamento Financeiro e Análise de Investimentos** — Anhanguera/Unopar (2023–2024)
+- **Técnico em Informática / Processamento de Dados** — ETEC Camargo Aranha · Centro Paula Souza (2002–2003)
+
+## Ferramentas e idiomas
+
+R · Excel / planilhas · Git · softwares estatísticos
+
+Português (nativo) · Inglês (fluente)
+
+## Contato
+
+```{=html}
+<div class="pills">
+  <span class="pill"><a href="mailto:crisfazza@gmail.com" style="color:inherit;text-decoration:none;"><i class="bi bi-envelope"></i> crisfazza@gmail.com</a></span>
+  <span class="pill"><a href="https://www.linkedin.com/in/ana-cristina-fazza" style="color:inherit;text-decoration:none;"><i class="bi bi-linkedin"></i> linkedin.com/in/ana-cristina-fazza</a></span>
+</div>
+```

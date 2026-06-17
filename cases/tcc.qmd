@@ -1,0 +1,190 @@
+---
+title: "Horário escolar e desempenho: o que 27 mil notas revelam"
+subtitle: "Especialização em Neurociência & Aprendizagem (2026) · limpeza, EDA, ANOVA/Kruskal-Wallis e correção de múltiplos testes em R"
+---
+
+```{r setup}
+#| include: false
+source("../R/helpers.R")
+aula  <- read.csv("../data/notas_aula.csv",  fileEncoding = "UTF-8")
+prova <- read.csv("../data/notas_prova.csv", fileEncoding = "UTF-8")
+t_aula  <- read.csv("../data/testes_aula.csv",  fileEncoding = "UTF-8")
+t_prova <- read.csv("../data/testes_prova.csv", fileEncoding = "UTF-8")
+
+ordem_area <- c("Ciências Humanas", "Linguagens", "Matemática", "Ciências da Natureza")
+aula$area  <- factor(aula$area,  levels = ordem_area)
+prova$area <- factor(prova$area, levels = ordem_area)
+aula$horario <- factor(aula$horario, levels = c("07h00","08h30","10h30","12h00"))
+prova$faixa  <- factor(prova$faixa,  levels = c("07h00–07h30","08h30–10h30","11h00–12h00"))
+
+cores_area <- c("Ciências Humanas" = "#185fa5", "Linguagens" = "#1d9e75",
+                "Matemática" = "#ba7517", "Ciências da Natureza" = "#534ab7")
+```
+
+::: {.callout-note}
+## Resumo executivo
+A partir de **27.650 registros** de notas de **384 alunos** (2022–2024) de uma
+escola de São Paulo, investiguei uma pergunta com cara de negócio: **o horário
+das atividades afeta o resultado?** Limpei e estruturei os dados em R, explorei
+com visualizações e testei as diferenças com métodos estatísticos **robustos**
+(ANOVA + Kruskal-Wallis em paralelo, com correção para múltiplas comparações).
+Achados: **aulas mais cedo → melhores notas em todas as áreas**; **provas mais
+tarde → melhores notas** (com exceção de Ciências da Natureza). O resultado vira
+uma recomendação concreta de organização de horários.
+:::
+
+## O contexto
+
+Na adolescência, o relógio biológico atrasa — os jovens dormem e acordam mais
+tarde. A escola, porém, começa cedo. Este trabalho (especialização em
+Neurociência) testou, **com dados reais de desempenho**, se o horário de aulas
+e provas se reflete nas notas.
+
+## A pergunta de negócio (traduzida)
+
+> Existe um **horário** em que o "produto" (a aula, a prova) rende mais? O efeito
+> é o mesmo para todos os **segmentos** (áreas do conhecimento) — ou alguns se
+> comportam diferente?
+
+É a mesma forma de pensar de quem otimiza horário de campanha, escala de turno
+ou janela de atendimento a partir de dados.
+
+## Os dados
+
+```{r}
+#| label: tcc-numeros
+#| echo: false
+#| results: asis
+cat("- **27.650 registros** em formato longo (1 linha = 1 nota de um aluno numa disciplina)\n")
+cat("- **384 alunos** (1º e 2º ano do Ensino Médio), anos de **2022 a 2024**\n")
+cat("- **20 disciplinas** agrupadas em **4 áreas** do conhecimento (reduz viés de disciplina/professor)\n")
+cat("- Cada registro cruza: nota · disciplina · área · turma · horário da aula · horário da prova · ano · semestre\n")
+cat("- Dados **anonimizados** e tratados (padronização de variáveis textuais e numéricas) antes da análise\n")
+cat("- Cruzamento das planilhas (notas × grade de horários de aula e prova) no **Excel**, antes de importar para o R\n")
+```
+
+## Dos métodos às habilidades de mercado
+
+::: {.traducao}
+| No trabalho | Como habilidade de dados |
+|---|---|
+| Excel | Funções para manipulação e organização dos dados |
+| `dplyr` sobre 27.650 registros | Manipulação e limpeza de dados (data wrangling) |
+| Boxplots por área e horário (`ggplot2`) | Análise exploratória e visualização |
+| ANOVA + Kruskal-Wallis em paralelo | Testes paramétricos e não-paramétricos + checagem de robustez |
+| Post-hoc de Wilcoxon par a par | Comparações múltiplas entre grupos |
+| Correção de Benjamini-Hochberg | Controle de falsos positivos (FDR) |
+| Agrupar horários para equilibrar amostras | Binning / feature engineering por poder estatístico |
+| Recomendação de organização escolar | Tradução de análise em decisão acionável |
+:::
+
+## Resultado 1 — horário da aula
+
+A nota média por horário de início da aula, em cada área (dados reais do estudo):
+
+```{r}
+#| label: fig-aula
+#| fig-cap: "Nota média por horário da aula. Em todas as áreas, os primeiros horários rendem notas mais altas."
+#| fig-height: 4
+ggplot(aula, aes(horario, media, color = area, group = area)) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2.6) +
+  scale_color_manual(values = cores_area) +
+  labs(x = "horário da aula", y = "nota média", color = NULL) +
+  tema_portfolio()
+```
+
+As diferenças são **estatisticamente significativas** em todas as áreas — e os
+dois testes (paramétrico e não-paramétrico) concordam:
+
+```{r}
+#| label: tab-aula
+#| echo: false
+knitr::kable(
+  t_aula,
+  col.names = c("Área da aula", "ANOVA (p)", "Kruskal-Wallis (p)", "interpretação"),
+  align = "lccl"
+)
+```
+
+## Resultado 2 — horário da prova
+
+Aqui o padrão se **inverte** — e quebra por área:
+
+```{r}
+#| label: fig-prova
+#| fig-cap: "Nota média por faixa de horário da prova. Provas mais tarde tendem a render mais — exceto em Ciências da Natureza, que vai na direção oposta."
+#| fig-height: 4
+ggplot(prova, aes(faixa, media, color = area, group = area)) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2.6) +
+  scale_color_manual(values = cores_area) +
+  labs(x = "faixa de horário da prova", y = "nota média", color = NULL) +
+  tema_portfolio()
+```
+
+```{r}
+#| label: tab-prova
+#| echo: false
+knitr::kable(
+  t_prova,
+  col.names = c("Área da prova", "ANOVA (p)", "Kruskal-Wallis (p)", "interpretação"),
+  align = "lccl"
+)
+```
+
+## Por que corrigir para múltiplas comparações?
+
+Ao comparar vários pares de horários, cada teste tem uma chance de dar um
+"falso positivo". Quanto mais testes, maior o risco de achar diferença onde não
+há. A **correção de Benjamini-Hochberg** ajusta os p-valores para controlar essa
+taxa — é uma linha de R:
+
+```{r}
+#| label: bh-demo
+#| echo: true
+# p-valores brutos de várias comparações (exemplo ilustrativo)
+p_brutos <- c(0.001, 0.008, 0.020, 0.041, 0.120, 0.320)
+data.frame(
+  p_bruto     = p_brutos,
+  p_ajustado  = round(p.adjust(p_brutos, method = "BH"), 3),
+  significativo = p.adjust(p_brutos, method = "BH") < 0.05
+)
+```
+
+## O que os dados disseram
+
+- **Aula:** quanto mais cedo, melhor — em **todas** as 4 áreas (ANOVA e
+  Kruskal-Wallis concordam). O período da primeira aula parece pegar o aluno já
+  no "ótimo" do despertar fisiológico.
+- **Prova:** o oposto, e **não uniforme** — Ciências Humanas e Linguagens rendem
+  mais em provas tardias; Matemática faz um "U"; e **Ciências da Natureza** vai
+  na contramão, melhor logo cedo.
+- A leitura: **aprender e ser avaliado** mobilizam processos cognitivos
+  diferentes, sensíveis ao horário de formas diferentes por área.
+
+## Por que isso importa para uma empresa
+
+É um caso completo de análise: **dados secundários bagunçados → limpeza e
+estruturação → exploração visual → teste estatístico robusto → correção honesta
+→ recomendação acionável** (distribuir aulas e provas de forma mais estratégica).
+Troque "nota por horário" por "conversão por horário de campanha" e é o mesmo
+trabalho.
+
+## Habilidades demonstradas neste case
+
+```{=html}
+<div class="pills">
+  <span class="pill">Data wrangling (dplyr)</span>
+  <span class="pill">Limpeza &amp; padronização</span>
+  <span class="pill">Análise exploratória (EDA)</span>
+  <span class="pill">Visualização (ggplot2)</span>
+  <span class="pill">ANOVA</span>
+  <span class="pill">Kruskal-Wallis</span>
+  <span class="pill">Comparações múltiplas (post-hoc)</span>
+  <span class="pill">Correção FDR (Benjamini-Hochberg)</span>
+  <span class="pill">Recomendação acionável</span>
+  <span class="pill">Excel</span>
+  <span class="pill">R</span>
+</div>
+```

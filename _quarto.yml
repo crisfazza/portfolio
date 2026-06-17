@@ -1,0 +1,57 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Ana Cristina Fazza"
+  description: "Portfólio de análise de dados — da pesquisa científica ao mercado"
+  navbar:
+    background: light
+    pinned: true
+    left:
+      - href: index.qmd
+        text: Início
+      - text: Cases
+        menu:
+          - href: cases/tese-filogeografia.qmd
+            text: "Doutorado — inferência em dados genéticos"
+          - href: cases/tcc.qmd
+            text: "Especialização — horário escolar e desempenho"
+      - href: sobre.qmd
+        text: Sobre
+    right:
+      - icon: linkedin
+        href: "https://www.linkedin.com/in/ana-cristina-fazza"
+        aria-label: LinkedIn
+      - icon: envelope
+        href: "mailto:crisfazza@gmail.com"
+        aria-label: E-mail
+  page-footer:
+    center: "Ana Cristina Fazza · Portfólio de análise de dados"
+
+format:
+  html:
+    theme:
+      - cosmo
+      - custom.scss
+    include-in-header:
+      text: |
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    toc: true
+    toc-title: "Nesta página"
+    toc-depth: 3
+    code-tools: false
+    code-fold: true
+    code-summary: "ver código R"
+    fig-align: center
+    grid:
+      body-width: 920px
+    smooth-scroll: true
+    anchor-sections: true
+
+execute:
+  freeze: auto
+  warning: false
+  message: false
