@@ -143,11 +143,11 @@ Na tese, decidir **quantas populações** havia é o mesmo problema de **quantos
 segmentos** existem numa base de clientes. Abaixo, uma demonstração do raciocínio
 com **dados simulados** (não os da tese): rodo *k-means* para vários números de
 grupos e uso o **método do cotovelo** para escolher — exatamente a lógica por
-trás da escolha do "melhor K" no clustering genético.
+trás da escolha pelo método de Evanno para o do "melhor K" no clustering genético.
 
 ```{r}
 #| label: fig-cotovelo
-#| fig-cap: "Método do cotovelo em dados simulados: a queda deixa de compensar a partir de poucos grupos."
+#| fig-cap: "Método de escolha aplicado em dados simulados: a queda deixa de compensar a partir de poucos grupos."
 #| fig-height: 3.6
 set.seed(42)
 n <- 150
